@@ -1,7 +1,7 @@
 package speedfast.model;
 
 /**
- * Clase hija que sienta las bases para crear un objeto de tipo pedido de comida
+ * Clase hija que sienta las bases para crear un objeto de tipo pedido de comida.
  */
 public class PedidoComida extends Pedido {
 
@@ -21,7 +21,7 @@ public class PedidoComida extends Pedido {
      * Constructor que inicializa un pedido de comida con todos sus datos.
      * @param idPedido Identificador único del pedido.
      * @param direccionEntrega Dirección en donde se entregará el pedido.
-     * @param tipoPedido Tipo de pedido (Comida, Express, Encomienda)
+     * @param tipoPedido Tipo de pedido (Comida, Express, Encomienda).
      * @param restaurante Restaurante desde donde se retira el pedido.
      * @param distanciaKm Distancia que recorre el pedido hasta llegar cliente.
      */

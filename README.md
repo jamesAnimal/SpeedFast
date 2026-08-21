@@ -13,7 +13,7 @@
 ---
 
 ## 📘 Descripción general del sistema
-Proyecto de la Semana 2 de Desarrollo Orientado a Objetos II. Convierte la clase **Pedido** en una clase abstracta con el atributo **distanciaKm** y los métodos **mostrarResumen()** (método concreto) y **calcularTiempoEntrega()** (método abstracto), sobrescrito con lógica propia en cada subclase (**PedidoComida**, **PedidoEncomienda**, **PedidoExpress**) para calcular el tiempo estimado de entrega según el tipo de servicio.
+Proyecto de la Semana 2 de Desarrollo Orientado a Objetos II. Convierte la clase **Pedido** en una clase abstracta con el atributo **distanciaKm** y los métodos **mostrarResumen()** (método concreto) y **calcularTiempoEntrega()** (método abstracto), sobrescrito con lógica propia en cada subclase (**PedidoComida**, **PedidoEncomienda**, **PedidoExpress**). La clase base además aplica el patrón **Template Method** mediante **procesarPedido()**, que orquesta los métodos para procesar cada pedido de forma completa.
 
 ---
 
@@ -25,7 +25,7 @@ Proyecto de la Semana 2 de Desarrollo Orientado a Objetos II. Convierte la clase
 **2.** **Abre el proyecto en IntelliJ IDEA.**
 
 **3.** **Ejecuta el archivo `Main.java`** dentro del paquete `speedfast`.
-dale
+
 ---
 
 **Repositorio GitHub:** [https://github.com/jamesAnimal/SpeedFast](https://github.com/jamesAnimal/SpeedFast)

@@ -105,6 +105,7 @@ public abstract class Pedido {
      */
     public void procesarPedido() {
 
+        asignarRepartidor();
         mostrarResumen();
         System.out.println(">El tiempo de entrega es de " + calcularTiempoEntrega() + " minutos aprox." + "\n");
     }
