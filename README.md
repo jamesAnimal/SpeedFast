@@ -1,6 +1,6 @@
 ![Duoc UC](https://www.duoc.cl/wp-content/uploads/2022/09/logo-0.png)
 
-# 💻 Explorando la sobrecarga y sobrescritura en clases derivadas – Desarrollo Orientado a Objetos II
+# 💻 Definiendo una clase abstracta y su jerarquía - Desarrollo Orientado a Objetos II
 
 ---
 
@@ -13,7 +13,7 @@
 ---
 
 ## 📘 Descripción general del sistema
-Proyecto de la Semana 1 de Desarrollo Orientado a Objetos II. Simula el sistema de asignación de repartidores de la empresa de reparto SpeedFast, aplicando polimorfismo mediante sobrescritura y sobrecarga del método **asignarRepartidor()** en las clases **PedidoComida**, **PedidoEncomienda** y **PedidoExpress**.
+Proyecto de la Semana 2 de Desarrollo Orientado a Objetos II. Convierte la clase **Pedido** en una clase abstracta con el atributo **distanciaKm** y los métodos **mostrarResumen()** (método concreto) y **calcularTiempoEntrega()** (método abstracto), sobrescrito con lógica propia en cada subclase (**PedidoComida**, **PedidoEncomienda**, **PedidoExpress**) para calcular el tiempo estimado de entrega según el tipo de servicio.
 
 ---
 
@@ -25,11 +25,11 @@ Proyecto de la Semana 1 de Desarrollo Orientado a Objetos II. Simula el sistema 
 **2.** **Abre el proyecto en IntelliJ IDEA.**
 
 **3.** **Ejecuta el archivo `Main.java`** dentro del paquete `speedfast`.
-
+dale
 ---
 
 **Repositorio GitHub:** [https://github.com/jamesAnimal/SpeedFast](https://github.com/jamesAnimal/SpeedFast)
 
 ---
 
-© Duoc UC | Escuela de Informática y Telecomunicaciones | Desarrollo Orientado a Objetos II | Semana 1.
+© Duoc UC | Escuela de Informática y Telecomunicaciones | Desarrollo Orientado a Objetos II | Semana 2.
