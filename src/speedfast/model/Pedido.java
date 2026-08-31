@@ -10,6 +10,7 @@ public abstract class Pedido {
     private String direccionEntrega;
     private String tipoPedido;
     private double distanciaKm;
+    private String nombreRepartidor;
 
     /**
      * Constructor vacío que inicializa un pedido con los valores por defecto.
@@ -20,6 +21,7 @@ public abstract class Pedido {
         this.direccionEntrega = "Sin Registrar";
         this.tipoPedido = "Sin Registrar";
         this.distanciaKm = 0.0;
+        this.nombreRepartidor = "Sin asignar";
     }
 
     /**
@@ -35,6 +37,7 @@ public abstract class Pedido {
         this.direccionEntrega = direccionEntrega;
         this.tipoPedido = tipoPedido;
         this.distanciaKm = distanciaKm;
+        this.nombreRepartidor = "Sin asignar";
     }
 
     // Getters y Setters.
@@ -78,6 +81,16 @@ public abstract class Pedido {
         this.distanciaKm = distanciaKm;
     }
 
+    public String getNombreRepartidor() {
+
+        return nombreRepartidor;
+    }
+
+    public void setNombreRepartidor(String nombreRepartidor) {
+
+        this.nombreRepartidor = nombreRepartidor;
+    }
+
     /**
      * Método encargado de asignar un repartidor.
      */
@@ -109,4 +122,13 @@ public abstract class Pedido {
         mostrarResumen();
         System.out.println(">El tiempo de entrega es de " + calcularTiempoEntrega() + " minutos aprox." + "\n");
     }
+
+    /**
+     * Método encargado de mostrar un pedido ya entregado, para el historial.
+     */
+    public void mostrarEntrega() {
+
+        System.out.println("- " + getClass().getSimpleName() + " #" + idPedido + " - entregado por " + nombreRepartidor + " en " + getDireccionEntrega());
+    }
+
 }

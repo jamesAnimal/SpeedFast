@@ -4,6 +4,8 @@ import speedfast.model.Pedido;
 import speedfast.model.PedidoComida;
 import speedfast.model.PedidoEncomienda;
 import speedfast.model.PedidoExpress;
+import speedfast.model.ControladorDeEnvios;
+import speedfast.model.RegistroDeEntregas;
 
 /**
  * Clase principal que instancia y procesa los distintos tipos de pedido de SpeedFast.
@@ -15,6 +17,8 @@ public class Main {
      */
     public static void main(String[] args) {
 
+        RegistroDeEntregas registro = new RegistroDeEntregas();
+        ControladorDeEnvios controlador = new ControladorDeEnvios(registro);
 
         // Instanciación de los pedidos.
         PedidoComida pedidoComida1 = new PedidoComida(1, "Las palmas #1234", "Delivery de comida", "Doggis", 3.0);
@@ -32,6 +36,22 @@ public class Main {
 
             pedido.procesarPedido();
         }
+
+        System.out.println("=====Iniciando Despacho de Pedidos====="+ "\n");
+
+        // Asignación manual de repartidores.
+        pedidoComida1.asignarRepartidor("Juan Perez");
+        pedidoExpress1.asignarRepartidor("Rodrigo Rojas");
+        pedidoEncomienda1.asignarRepartidor("Carlos Correa");
+
+        // Despacho de los pedidos.
+        controlador.despachar(pedidoComida1);
+        controlador.despachar(pedidoExpress1);
+        controlador.cancelar(pedidoEncomienda1);
+        System.out.println("\n");
+
+        registro.verHistorial();
+
     }
 }
 

@@ -63,7 +63,8 @@ public class PedidoEncomienda extends Pedido {
         System.out.println("=====Entrega de Encomienda=====" + "\n");
         System.out.println(">Buscando Repartidor...");
         System.out.println(">Verificando que repartidor tenga capacidad de carga de " + pesoEncomienda + " kg y capacidad de embalaje... OK!");
-        System.out.println(">Repartidor " + nombreRepartidor + " asignado a entregar Encomienda a " + getDireccionEntrega());
+        System.out.println(">Repartidor " + nombreRepartidor + " asignado a entregar Encomienda a " + getDireccionEntrega() + "\n");
+        setNombreRepartidor(nombreRepartidor);
     }
 
     /**

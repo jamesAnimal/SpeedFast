@@ -63,7 +63,8 @@ public class PedidoComida extends Pedido {
         System.out.println("=====Pedido de Comida=====" + "\n");
         System.out.println(">Buscando Repartidor...");
         System.out.println(">Verificando que repartidor tenga mochila térmica... OK!");
-        System.out.println(">Repartidor " + nombreRepartidor + " asignado a buscar el pedido al restaurante " + restaurante);
+        System.out.println(">Repartidor " + nombreRepartidor + " asignado a buscar el pedido al restaurante " + restaurante + "\n");
+        setNombreRepartidor(nombreRepartidor);
     }
 
     /**

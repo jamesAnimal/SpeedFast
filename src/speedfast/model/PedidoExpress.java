@@ -63,7 +63,8 @@ public class PedidoExpress extends Pedido {
         System.out.println("=====Entrega Express=====" + "\n");
         System.out.println(">Buscando Repartidor...");
         System.out.println(">Verificando repartidor mas cercano a " + establecimiento + " y con disponibilidad inmediata... OK!");
-        System.out.println(">Repartidor " + nombreRepartidor + " asignado a recoger pedido en " + establecimiento);
+        System.out.println(">Repartidor " + nombreRepartidor + " asignado a recoger pedido en " + establecimiento + "\n");
+        setNombreRepartidor(nombreRepartidor);
     }
 
     /**

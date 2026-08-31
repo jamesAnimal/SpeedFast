@@ -1,19 +1,31 @@
 ![Duoc UC](https://www.duoc.cl/wp-content/uploads/2022/09/logo-0.png)
 
-# 💻 Definiendo una clase abstracta y su jerarquía - Desarrollo Orientado a Objetos II
+# 💻 Diseñando un sistema orientado a objetos con clases abstractas, polimorfismo e interfaces - Desarrollo Orientado a Objetos II
 
 ---
 
 ## 👤 Autor del proyecto
-- **Nombre completo:** Jaime Seguel Retamales.
-- **Sección:** Desarrollo Orientado a Objetos II.
 - **Carrera:** Analista Programador.
+- **Asignatura:** Desarrollo Orientado a Objetos II (005A).
 - **Sede:** Online.
+- **Profesor:** Eithel González Rojas.
+- **Nombre completo:** Jaime Seguel Retamales.
 
 ---
 
 ## 📘 Descripción general del sistema
-Proyecto de la Semana 2 de Desarrollo Orientado a Objetos II. Convierte la clase **Pedido** en una clase abstracta con el atributo **distanciaKm** y los métodos **mostrarResumen()** (método concreto) y **calcularTiempoEntrega()** (método abstracto), sobrescrito con lógica propia en cada subclase (**PedidoComida**, **PedidoEncomienda**, **PedidoExpress**). La clase base además aplica el patrón **Template Method** mediante **procesarPedido()**, que orquesta los métodos para procesar cada pedido de forma completa.
+Proyecto de la Semana 3 de Desarrollo Orientado a Objetos II. Integra la jerarquía de **Pedido** (polimorfismo y clase abstracta de las semanas anteriores) con 3 interfaces nuevas: **Despachable**, **Cancelable** y **Rastreable**. Las interfaces se reparten entre 2 clases de servicio: **ControladorDeEnvios** (despacho y cancelación) y **RegistroDeEntregas** (historial, guardado en un `ArrayList<Pedido>`), separando responsabilidades en vez de concentrarlas en una sola clase.
+
+---
+
+## 🧩 Diagrama de clases
+
+![Diagrama de clases del sistema SpeedFast](diagrama_de_clases.jpg)
+
+**Aporte a escalabilidad, reutilización y mantenibilidad:**
+- **Reutilización:** los atributos y métodos comunes a todo pedido (`idPedido`, `direccionEntrega`, `distanciaKm`, `mostrarResumen()`, `procesarPedido()`) viven una sola vez en `Pedido`, y las 3 subclases los heredan sin duplicar código.
+- **Escalabilidad:** agregar un nuevo tipo de pedido, o una nueva interfaz, no obliga a modificar las clases existentes — solo a extenderlas, gracias a la jerarquía abstracta y al uso de interfaces.
+- **Mantenibilidad:** al repartir `Despachable`, `Cancelable` y `Rastreable` entre `ControladorDeEnvios` y `RegistroDeEntregas` (en vez de una sola clase con las 3), cada una mantiene una única responsabilidad, lo que facilita encontrar y corregir errores sin afectar al resto del sistema.
 
 ---
 
@@ -32,4 +44,4 @@ Proyecto de la Semana 2 de Desarrollo Orientado a Objetos II. Convierte la clase
 
 ---
 
-© Duoc UC | Escuela de Informática y Telecomunicaciones | Desarrollo Orientado a Objetos II | Semana 2.
+© Duoc UC | Escuela de Informática y Telecomunicaciones | Desarrollo Orientado a Objetos II | Semana 3.
