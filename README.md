@@ -1,6 +1,6 @@
 ![Duoc UC](https://www.duoc.cl/wp-content/uploads/2022/09/logo-0.png)
 
-# 💻 Diseñando un sistema orientado a objetos con clases abstractas, polimorfismo e interfaces - Desarrollo Orientado a Objetos II
+# 💻 Diseñando un sistema orientado a objetos con clases abstractas, polimorfismo e interfaces - Semana 3 - Desarrollo Orientado a Objetos II
 
 ---
 
