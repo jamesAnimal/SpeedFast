@@ -1,6 +1,6 @@
 ![Duoc UC](https://www.duoc.cl/wp-content/uploads/2022/09/logo-0.png)
 
-# 💻 Diseñando un sistema orientado a objetos con clases abstractas, polimorfismo e interfaces - Desarrollo Orientado a Objetos II
+# 💻 Ejecutando tareas en paralelo con hilos en Java - Desarrollo Orientado a Objetos II
 
 ---
 
@@ -14,18 +14,7 @@
 ---
 
 ## 📘 Descripción general del sistema
-Proyecto de la Semana 3 de Desarrollo Orientado a Objetos II. Integra la jerarquía de **Pedido** (polimorfismo y clase abstracta de las semanas anteriores) con 3 interfaces nuevas: **Despachable**, **Cancelable** y **Rastreable**. Las interfaces se reparten entre 2 clases de servicio: **ControladorDeEnvios** (despacho y cancelación) y **RegistroDeEntregas** (historial, guardado en un `ArrayList<Pedido>`), separando responsabilidades en vez de concentrarlas en una sola clase.
-
----
-
-## 🧩 Diagrama de clases
-
-![Diagrama de clases del sistema SpeedFast](diagrama_de_clases.jpg)
-
-**Aporte a escalabilidad, reutilización y mantenibilidad:**
-- **Reutilización:** los atributos y métodos comunes a todo pedido (`idPedido`, `direccionEntrega`, `distanciaKm`, `mostrarResumen()`, `procesarPedido()`) viven una sola vez en `Pedido`, y las 3 subclases los heredan sin duplicar código.
-- **Escalabilidad:** agregar un nuevo tipo de pedido, o una nueva interfaz, no obliga a modificar las clases existentes — solo a extenderlas, gracias a la jerarquía abstracta y al uso de interfaces.
-- **Mantenibilidad:** al repartir `Despachable`, `Cancelable` y `Rastreable` entre `ControladorDeEnvios` y `RegistroDeEntregas` (en vez de una sola clase con las 3), cada una mantiene una única responsabilidad, lo que facilita encontrar y corregir errores sin afectar al resto del sistema.
+Proyecto de la Semana 4 de Desarrollo Orientado a Objetos II. Incorpora programación concurrente sobre la jerarquía de **Pedido** y las interfaces de la semana anterior (**Despachable**, **Cancelable**, **Rastreable**). La nueva clase **Repartidor** implementa `Runnable` y entrega su lista de pedidos asignada en un hilo independiente; `ExecutorService` ejecuta a los 3 repartidores en paralelo, y `Thread.sleep()` con valores aleatorios simula el tiempo de cada entrega. Antes de despachar, cada pedido tiene, mediante la clase `Random`, una probabilidad de 1/6 de ser cancelado (`Cancelable`), quedando así fuera de la entrega.
 
 ---
 
@@ -44,4 +33,4 @@ Proyecto de la Semana 3 de Desarrollo Orientado a Objetos II. Integra la jerarqu
 
 ---
 
-© Duoc UC | Escuela de Informática y Telecomunicaciones | Desarrollo Orientado a Objetos II | Semana 3.
+© Duoc UC | Escuela de Informática y Telecomunicaciones | Desarrollo Orientado a Objetos II | Semana 4.

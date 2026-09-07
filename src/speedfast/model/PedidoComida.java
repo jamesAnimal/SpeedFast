@@ -49,9 +49,13 @@ public class PedidoComida extends Pedido {
     public void asignarRepartidor() {
 
         System.out.println("=====Pedido de Comida=====" + "\n");
+        Temporizador.pausaCorta();
         System.out.println(">Buscando Repartidor...");
-        System.out.println(">Verificando que repartidor tenga mochila térmica... OK!");
+        Temporizador.pausaCorta();
+        System.out.println(">Verificando que repartidor tenga mochila termica... OK!");
+        Temporizador.pausaCorta();
         System.out.println(">Repartidor asignado a buscar el pedido al restaurante " + restaurante);
+        Temporizador.pausaCorta();
     }
 
     /**
@@ -62,7 +66,7 @@ public class PedidoComida extends Pedido {
 
         System.out.println("=====Pedido de Comida=====" + "\n");
         System.out.println(">Buscando Repartidor...");
-        System.out.println(">Verificando que repartidor tenga mochila térmica... OK!");
+        System.out.println(">Verificando que repartidor tenga mochila termica... OK!");
         System.out.println(">Repartidor " + nombreRepartidor + " asignado a buscar el pedido al restaurante " + restaurante + "\n");
         setNombreRepartidor(nombreRepartidor);
     }

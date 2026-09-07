@@ -23,8 +23,13 @@ public class ControladorDeEnvios implements Despachable, Cancelable {
     @Override
     public void cancelar(Pedido pedido) {
 
+        System.out.println("=====Pedido " + pedido.getTipoPedido() + "=====" + "\n");
+        Temporizador.pausaCorta();
         System.out.println("Cancelando " + pedido.getClass().getSimpleName() + " #" + pedido.getIdPedido() + "...");
-        System.out.println("-> Pedido cancelado exitosamente.");
+        Temporizador.pausaCorta();
+        System.out.println("-> Pedido cancelado exitosamente." + "\n");
+        Temporizador.pausaCorta();
+        pedido.setCancelado(true);
     }
 
     /**
@@ -34,8 +39,9 @@ public class ControladorDeEnvios implements Despachable, Cancelable {
     @Override
     public void despachar(Pedido pedido) {
 
-        System.out.println("Despachando " + pedido.getClass().getSimpleName() + " #" + pedido.getIdPedido() + "...");
-        System.out.println("-> Pedido despachado exitosamente.");
+        System.out.println("Registrando " + pedido.getClass().getSimpleName() + " #" + pedido.getIdPedido() + "...");
+        Temporizador.pausaCorta();
+        System.out.println("-> Pedido registrado exitosamente.");
         registro.registrarEntrega(pedido);
     }
 }

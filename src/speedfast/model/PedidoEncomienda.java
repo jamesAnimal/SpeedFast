@@ -48,10 +48,14 @@ public class PedidoEncomienda extends Pedido {
     @Override
     public void asignarRepartidor() {
 
-        System.out.println("=====Entrega de Encomienda=====" + "\n");
+        System.out.println("=====Pedido de Encomienda=====" + "\n");
+        Temporizador.pausaCorta();
         System.out.println(">Buscando Repartidor...");
+        Temporizador.pausaCorta();
         System.out.println(">Verificando que repartidor tenga capacidad de carga de " + pesoEncomienda + " kg y capacidad de embalaje... OK!");
+        Temporizador.pausaCorta();
         System.out.println(">Repartidor asignado a entregar Encomienda a " + getDireccionEntrega());
+        Temporizador.pausaCorta();
     }
 
     /**
@@ -60,7 +64,7 @@ public class PedidoEncomienda extends Pedido {
      */
     public void asignarRepartidor(String nombreRepartidor) {
 
-        System.out.println("=====Entrega de Encomienda=====" + "\n");
+        System.out.println("=====Pedido de Encomienda=====" + "\n");
         System.out.println(">Buscando Repartidor...");
         System.out.println(">Verificando que repartidor tenga capacidad de carga de " + pesoEncomienda + " kg y capacidad de embalaje... OK!");
         System.out.println(">Repartidor " + nombreRepartidor + " asignado a entregar Encomienda a " + getDireccionEntrega() + "\n");

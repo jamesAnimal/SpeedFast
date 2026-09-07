@@ -25,7 +25,6 @@ public class RegistroDeEntregas implements Rastreable {
     @Override
     public void verHistorial() {
 
-        System.out.println("=====Historial=====" + "\n");
         for (Pedido pedido : historial) {
 
             pedido.mostrarEntrega();

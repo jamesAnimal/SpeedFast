@@ -11,6 +11,7 @@ public abstract class Pedido {
     private String tipoPedido;
     private double distanciaKm;
     private String nombreRepartidor;
+    private boolean cancelado;
 
     /**
      * Constructor vacío que inicializa un pedido con los valores por defecto.
@@ -22,6 +23,7 @@ public abstract class Pedido {
         this.tipoPedido = "Sin Registrar";
         this.distanciaKm = 0.0;
         this.nombreRepartidor = "Sin asignar";
+        this.cancelado = false;
     }
 
     /**
@@ -38,6 +40,7 @@ public abstract class Pedido {
         this.tipoPedido = tipoPedido;
         this.distanciaKm = distanciaKm;
         this.nombreRepartidor = "Sin asignar";
+        this.cancelado = false;
     }
 
     // Getters y Setters.
@@ -91,6 +94,16 @@ public abstract class Pedido {
         this.nombreRepartidor = nombreRepartidor;
     }
 
+    public boolean isCancelado() {
+
+        return cancelado;
+    }
+
+    public void setCancelado(boolean cancelado) {
+
+        this.cancelado = cancelado;
+    }
+
     /**
      * Método encargado de asignar un repartidor.
      */
@@ -104,7 +117,9 @@ public abstract class Pedido {
      */
     public void mostrarResumen() {
 
-        System.out.println(">El pedido " + idPedido + " a " + distanciaKm + " km de distancia será entregado en " + direccionEntrega);
+        System.out.println(">El pedido " + idPedido + " a " + distanciaKm + " km de distancia sera entregado en " + direccionEntrega);
+        Temporizador.pausaCorta();
+
     }
 
     /**
@@ -128,7 +143,17 @@ public abstract class Pedido {
      */
     public void mostrarEntrega() {
 
-        System.out.println("- " + getClass().getSimpleName() + " #" + idPedido + " - entregado por " + nombreRepartidor + " en " + getDireccionEntrega());
+        if (cancelado) {
+
+            System.out.println(">" + getClass().getSimpleName() + " #" + idPedido + " [CANCELADO]");
+
+        } else {
+
+            System.out.println(">" + getClass().getSimpleName() + " #" + idPedido + " entregado por " + nombreRepartidor + " en " + direccionEntrega);
+
+
+        }
+
     }
 
 }

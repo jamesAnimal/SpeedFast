@@ -48,10 +48,14 @@ public class PedidoExpress extends Pedido {
     @Override
     public void asignarRepartidor() {
 
-        System.out.println("=====Entrega Express=====" + "\n");
+        System.out.println("=====Pedido Express=====" + "\n");
+        Temporizador.pausaCorta();
         System.out.println(">Buscando Repartidor...");
+        Temporizador.pausaCorta();
         System.out.println(">Verificando repartidor mas cercano a " + establecimiento + " y con disponibilidad inmediata... OK!");
+        Temporizador.pausaCorta();
         System.out.println(">Repartidor asignado a recoger pedido en " + establecimiento);
+        Temporizador.pausaCorta();
     }
 
     /**
@@ -60,7 +64,7 @@ public class PedidoExpress extends Pedido {
      */
     public void asignarRepartidor(String nombreRepartidor) {
 
-        System.out.println("=====Entrega Express=====" + "\n");
+        System.out.println("=====Pedido Express=====" + "\n");
         System.out.println(">Buscando Repartidor...");
         System.out.println(">Verificando repartidor mas cercano a " + establecimiento + " y con disponibilidad inmediata... OK!");
         System.out.println(">Repartidor " + nombreRepartidor + " asignado a recoger pedido en " + establecimiento + "\n");
