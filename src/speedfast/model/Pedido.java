@@ -1,159 +1,51 @@
 package speedfast.model;
 
 /**
- * Clase padre y abstracta que sienta las bases para crear un objeto de tipo pedido.
+ * Clase que sienta las bases para crear un objeto de tipo pedido.
  */
-public abstract class Pedido {
+public class Pedido {
 
     // Atributos de la clase Pedido.
     private int idPedido;
-    private String direccionEntrega;
-    private String tipoPedido;
-    private double distanciaKm;
-    private String nombreRepartidor;
-    private boolean cancelado;
-
-    /**
-     * Constructor vacío que inicializa un pedido con los valores por defecto.
-     */
-    public Pedido() {
-
-        this.idPedido = 0;
-        this.direccionEntrega = "Sin Registrar";
-        this.tipoPedido = "Sin Registrar";
-        this.distanciaKm = 0.0;
-        this.nombreRepartidor = "Sin asignar";
-        this.cancelado = false;
-    }
+    private String direccionPedido;
+    private EstadoPedido estadoPedido;
 
     /**
      * Constructor que inicializa un pedido con todos sus datos.
+     * @param direccionPedido Dirección de entrega del pedido.
      * @param idPedido Identificador único del pedido.
-     * @param direccionEntrega Dirección en donde se entregará el pedido.
-     * @param tipoPedido Tipo de pedido (Comida, Express, Encomienda).
-     * @param distanciaKm Distancia que recorre el pedido hasta llegar cliente.
      */
-    public Pedido(int idPedido, String direccionEntrega, String tipoPedido, double distanciaKm) {
+    public Pedido(String direccionPedido, int idPedido) {
 
+        this.direccionPedido = direccionPedido;
         this.idPedido = idPedido;
-        this.direccionEntrega = direccionEntrega;
-        this.tipoPedido = tipoPedido;
-        this.distanciaKm = distanciaKm;
-        this.nombreRepartidor = "Sin asignar";
-        this.cancelado = false;
+        this.estadoPedido = EstadoPedido.PENDIENTE;
     }
 
     // Getters y Setters.
     public int getIdPedido() {
-
         return idPedido;
     }
 
-    public void setIdPedido(int idPedido) {
-
-        this.idPedido = idPedido;
+    public String getDireccionPedido() {
+        return direccionPedido;
     }
 
-    public String getDireccionEntrega() {
-
-        return direccionEntrega;
+    public synchronized EstadoPedido getEstadoPedido() {
+        return estadoPedido;
     }
 
-    public void setDireccionEntrega(String direccionEntrega) {
+    public synchronized void setEstadoPedido(String nuevoEstado) {
 
-        this.direccionEntrega = direccionEntrega;
-    }
-
-    public String getTipoPedido() {
-
-        return tipoPedido;
-    }
-
-    public void setTipoPedido(String tipoPedido) {
-
-        this.tipoPedido = tipoPedido;
-    }
-
-    public double getDistanciaKm() {
-
-        return distanciaKm;
-    }
-
-    public void setDistanciaKm(double distanciaKm) {
-
-        this.distanciaKm = distanciaKm;
-    }
-
-    public String getNombreRepartidor() {
-
-        return nombreRepartidor;
-    }
-
-    public void setNombreRepartidor(String nombreRepartidor) {
-
-        this.nombreRepartidor = nombreRepartidor;
-    }
-
-    public boolean isCancelado() {
-
-        return cancelado;
-    }
-
-    public void setCancelado(boolean cancelado) {
-
-        this.cancelado = cancelado;
+        this.estadoPedido = EstadoPedido.valueOf(nuevoEstado);
     }
 
     /**
-     * Método encargado de asignar un repartidor.
+     * Método que retorna una representación en texto del pedido.
+     * @return String con los datos del pedido.
      */
-    public void asignarRepartidor() {
-
-        System.out.println("El pedido " + idPedido + " ya tiene repartidor");
+    @Override
+    public String toString() {
+        return "Pedido{" + "idPedido=" + idPedido + ", direccionPedido='" + direccionPedido + '\'' + ", estadoPedido=" + estadoPedido + '}';
     }
-
-    /**
-     * Método encargado de mostrar un resumen del pedido.
-     */
-    public void mostrarResumen() {
-
-        System.out.println(">El pedido " + idPedido + " a " + distanciaKm + " km de distancia sera entregado en " + direccionEntrega);
-        Temporizador.pausaCorta();
-
-    }
-
-    /**
-     * Método abstracto para calcular el tiempo de entrega, debe ser definido por cada clase hija.
-     * @return Int con el tiempo de entrega en minutos.
-     */
-    public abstract int calcularTiempoEntrega();
-
-    /**
-     * Método con patrón Template Method que organiza los métodos para procesar un pedido.
-     */
-    public void procesarPedido() {
-
-        asignarRepartidor();
-        mostrarResumen();
-        System.out.println(">El tiempo de entrega es de " + calcularTiempoEntrega() + " minutos aprox." + "\n");
-    }
-
-    /**
-     * Método encargado de mostrar un pedido ya entregado, para el historial.
-     */
-    public void mostrarEntrega() {
-
-        if (cancelado) {
-
-            System.out.println(">" + getClass().getSimpleName() + " #" + idPedido + " [CANCELADO]");
-
-        } else {
-
-            System.out.println(">" + getClass().getSimpleName() + " #" + idPedido + " entregado por " + nombreRepartidor + " en " + direccionEntrega);
-
-
-        }
-
-    }
-
 }

@@ -1,6 +1,6 @@
 package speedfast.model;
 
-import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Clase que sienta las bases para crear un objeto de tipo repartidor.
@@ -8,59 +8,53 @@ import java.util.ArrayList;
 public class Repartidor implements Runnable {
 
     // Atributos de la clase Repartidor.
-    private String nombre;
-    private ArrayList<Pedido> listaPedidos = new ArrayList<>();
-
-    /**
-     * Constructor vacío que inicializa un Repartidor
-     * con los valores por defecto.
-     */
-    public Repartidor() {
-        this.nombre = "Sin Registrar";
-    }
+    private final String nombreRepartidor;
+    private final ZonaDeCarga zonaDeCarga;
+    private Random random = new Random();
 
     /**
      * Constructor que inicializa un repartidor con todos sus datos.
-     * @param nombre Nombre del repartidor.
-     * @param listaPedidos Lista de pedidos asignados al repartidor.
+     * @param nombreRepartidor Nombre del repartidor.
+     * @param zonaDeCarga Zona de carga compartida desde donde el repartidor retira sus pedidos.
      */
-    public Repartidor(String nombre, ArrayList<Pedido> listaPedidos) {
-        this.nombre = nombre;
-        this.listaPedidos = listaPedidos;
-    }
+    public Repartidor(String nombreRepartidor, ZonaDeCarga zonaDeCarga) {
 
-    // Getters y Setters.
-    public ArrayList<Pedido> getListaPedidos() {
-
-        return listaPedidos;
-    }
-
-    public void setListaPedidos(ArrayList<Pedido> listaPedidos) {
-
-        this.listaPedidos = listaPedidos;
-    }
-
-    public String getNombre() {
-
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-
-        this.nombre = nombre;
+        this.nombreRepartidor = nombreRepartidor;
+        this.zonaDeCarga = zonaDeCarga;
     }
 
     /**
-     * Método encargado de ejecutar la entrega secuencial de los pedidos asignados al repartidor.
+     * Método encargado de retirar y entregar pedidos de la zona de carga compartida hasta que no queden más disponibles.
      */
     @Override
     public void run() {
 
-        for (Pedido pedido : listaPedidos) {
+        while (true) {
 
-            System.out.println("[Repartidor: " + nombre + "] entregando " + pedido.getClass().getSimpleName() + " #" + pedido.getIdPedido() + ".");
-            Temporizador.pausaLarga();
-            System.out.println("[Repartidor: " + nombre + "] Pedido #" + pedido.getIdPedido() + " entregado.");
+            Pedido pedido = zonaDeCarga.retirarPedido();
+
+            if (pedido == null) {
+
+                break;
+            }
+
+            pedido.setEstadoPedido("EN_REPARTO");
+            System.out.println("[Repartidor - " + nombreRepartidor + "] Retirando pedido #" + pedido.getIdPedido() + "...");
+            System.out.println("[Repartidor - " + nombreRepartidor + "] Estado: " + pedido.getEstadoPedido());
+
+            try {
+                // simula los tiempos de espera de manera aleatoria.
+                Thread.sleep(1500 + random.nextInt(3000));
+
+            } catch (InterruptedException e) {
+
+                Thread.currentThread().interrupt();
+
+                return;
+            }
+
+            pedido.setEstadoPedido("ENTREGADO");
+            System.out.println("[Repartidor - " + nombreRepartidor + "] Estado: " + pedido.getEstadoPedido());
         }
     }
 }
