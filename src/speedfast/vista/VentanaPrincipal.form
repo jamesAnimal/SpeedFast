@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="speedfast.vista.VentanaPrincipal">
+  <grid id="27dc6" binding="panelPrincipal" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="1">
+    <margin top="15" left="15" bottom="15" right="15"/>
+    <constraints>
+      <xy x="20" y="20" width="720" height="874"/>
+    </constraints>
+    <properties>
+      <background color="-16053740"/>
+      <font name="Courier New" size="16" style="1"/>
+      <maximumSize width="700" height="700"/>
+      <minimumSize width="700" height="700"/>
+      <preferredSize width="700" height="700"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="abc9d" binding="panelIngresoPed" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="5" left="5" bottom="0" right="5"/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="100"/>
+            <preferred-size width="-1" height="100"/>
+            <maximum-size width="-1" height="100"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-16053740"/>
+        </properties>
+        <border type="line">
+          <color color="-1038182"/>
+        </border>
+        <children>
+          <component id="ad3dc" class="javax.swing.JTextField" binding="txtfID">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-16053740"/>
+              <caretColor color="-1038182"/>
+              <dragEnabled value="true"/>
+              <focusTraversalPolicyProvider value="false"/>
+              <font name="Courier New" size="14"/>
+              <foreground color="-14490369"/>
+            </properties>
+          </component>
+          <component id="fb0e5" class="javax.swing.JTextField" binding="txtfDireccion">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-16053740"/>
+              <caretColor color="-1038182"/>
+              <focusTraversalPolicyProvider value="false"/>
+              <font name="Courier New" size="14"/>
+              <foreground color="-14490369"/>
+            </properties>
+          </component>
+          <component id="982cb" class="javax.swing.JLabel" binding="lblID">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Courier New" size="14"/>
+              <foreground color="-14490369"/>
+              <text value="ID:"/>
+            </properties>
+          </component>
+          <component id="4e96c" class="javax.swing.JLabel" binding="lblDireccion">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Courier New" size="14"/>
+              <foreground color="-14490369"/>
+              <text value="Dirección:"/>
+            </properties>
+          </component>
+          <component id="9a092" class="javax.swing.JLabel" binding="lblTipoPed">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Courier New" size="14"/>
+              <foreground color="-14490369"/>
+              <text value="Tipo de pedido:"/>
+            </properties>
+          </component>
+          <component id="2d189" class="javax.swing.JButton" binding="btnGuardarPed">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-14490369"/>
+              <font name="Courier New" size="16" style="1"/>
+              <foreground color="-16053740"/>
+              <text value="[Registrar Pedido]"/>
+            </properties>
+          </component>
+          <component id="203cf" class="javax.swing.JComboBox" binding="cmbxTipoPed">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-16053740"/>
+              <focusTraversalPolicyProvider value="false"/>
+              <font name="Courier New" size="14"/>
+              <foreground color="-14490369"/>
+              <model/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="4e2d5" binding="panelTablaPedidos" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="5" bottom="0" right="5"/>
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="4" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <maximum-size width="-1" height="370"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-16053740"/>
+          <foreground color="-14490369"/>
+        </properties>
+        <border type="line">
+          <color color="-1038182"/>
+        </border>
+        <children>
+          <component id="d4aa4" class="javax.swing.JLabel" binding="lblTablaPed">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Courier New" size="18" style="1"/>
+              <foreground color="-14490369"/>
+              <text value="&gt;&gt;&gt;Tabla de Pedidos&lt;&lt;&lt;"/>
+            </properties>
+          </component>
+          <component id="6987d" class="javax.swing.JButton" binding="btnIniciarEntregas">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <actionCommand value="Button"/>
+              <background color="-14490369"/>
+              <font name="Courier New" size="16" style="1"/>
+              <foreground color="-16053740"/>
+              <label value="[Asignar repartidores e iniciar entregas]"/>
+              <selected value="false"/>
+              <text value="[Asignar repartidores e iniciar entregas]"/>
+            </properties>
+          </component>
+          <scrollpane id="b93be" binding="scrllTablaPed">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="-1" height="300"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-16053740"/>
+            </properties>
+            <border type="line">
+              <color color="-14490369"/>
+            </border>
+            <children>
+              <component id="e9c88" class="javax.swing.JTable" binding="tblTablaPed">
+                <constraints/>
+                <properties>
+                  <background color="-16053740"/>
+                  <fillsViewportHeight value="true"/>
+                  <focusTraversalPolicyProvider value="false"/>
+                  <font name="Courier New" size="14"/>
+                  <foreground color="-1038182"/>
+                  <gridColor color="-14490369"/>
+                  <inheritsPopupMenu value="false"/>
+                  <selectionBackground color="-14490369"/>
+                  <selectionForeground color="-1038182"/>
+                </properties>
+              </component>
+            </children>
+          </scrollpane>
+        </children>
+      </grid>
+      <grid id="34dcc" binding="panelTextaRegistro" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="5" bottom="5" right="5"/>
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="150"/>
+            <preferred-size width="-1" height="150"/>
+            <maximum-size width="-1" height="150"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-16053740"/>
+          <foreground color="-14490369"/>
+        </properties>
+        <border type="line">
+          <color color="-1038182"/>
+        </border>
+        <children>
+          <component id="b89c0" class="javax.swing.JLabel" binding="lblTextaRegistros">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Courier New" size="18" style="1"/>
+              <foreground color="-14490369"/>
+              <text value="&gt;&gt;&gt;Actividad de Pedidos&lt;&lt;&lt;"/>
+            </properties>
+          </component>
+          <scrollpane id="26cbf" binding="scrllTxtaRegistros">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="line">
+              <color color="-1038182"/>
+            </border>
+            <children>
+              <component id="b6faa" class="javax.swing.JTextArea" binding="txtaRegistros">
+                <constraints/>
+                <properties>
+                  <background color="-16053740"/>
+                  <font name="Courier New" size="14"/>
+                  <foreground color="-14490369"/>
+                  <margin top="15" left="15" bottom="15" right="15"/>
+                  <selectedTextColor color="-14490369"/>
+                </properties>
+              </component>
+            </children>
+          </scrollpane>
+        </children>
+      </grid>
+      <grid id="297e3" binding="panelTitulo" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-16053740"/>
+          <font size="16" style="1"/>
+        </properties>
+        <border type="line">
+          <color color="-1038182"/>
+        </border>
+        <children>
+          <component id="3c214" class="javax.swing.JLabel" binding="lblRegistroPed">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Courier New" size="18" style="1"/>
+              <foreground color="-14490369"/>
+              <text value="&gt;&gt;&gt;Registro de Pedidos&lt;&lt;&lt;"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

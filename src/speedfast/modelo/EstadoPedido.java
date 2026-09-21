@@ -1,4 +1,4 @@
-package speedfast.model;
+package speedfast.modelo;
 
 /**
  * Enum que define los posibles estados de un pedido.

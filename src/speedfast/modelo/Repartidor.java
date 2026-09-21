@@ -1,4 +1,6 @@
-package speedfast.model;
+package speedfast.modelo;
+
+import speedfast.vista.VentanaPrincipal;
 
 import java.util.Random;
 
@@ -11,16 +13,19 @@ public class Repartidor implements Runnable {
     private final String nombreRepartidor;
     private final ZonaDeCarga zonaDeCarga;
     private Random random = new Random();
+    private VentanaPrincipal ventanaPrincipal;
 
     /**
      * Constructor que inicializa un repartidor con todos sus datos.
      * @param nombreRepartidor Nombre del repartidor.
      * @param zonaDeCarga Zona de carga compartida desde donde el repartidor retira sus pedidos.
+     * @param ventanaPrincipal Ventana principal, usada para registrar mensajes de actividad.
      */
-    public Repartidor(String nombreRepartidor, ZonaDeCarga zonaDeCarga) {
+    public Repartidor(String nombreRepartidor, ZonaDeCarga zonaDeCarga, VentanaPrincipal ventanaPrincipal) {
 
         this.nombreRepartidor = nombreRepartidor;
         this.zonaDeCarga = zonaDeCarga;
+        this.ventanaPrincipal = ventanaPrincipal;
     }
 
     /**
@@ -39,8 +44,8 @@ public class Repartidor implements Runnable {
             }
 
             pedido.setEstadoPedido("EN_REPARTO");
-            System.out.println("[Repartidor - " + nombreRepartidor + "] Retirando pedido #" + pedido.getIdPedido() + "...");
-            System.out.println("[Repartidor - " + nombreRepartidor + "] Estado: " + pedido.getEstadoPedido());
+            ventanaPrincipal.registrarMensaje("[Repartidor - " + nombreRepartidor + "] Retirando pedido #" + pedido.getIdPedido() + "...");
+            ventanaPrincipal.registrarMensaje("[Repartidor - " + nombreRepartidor + "] Estado: " + pedido.getEstadoPedido());
 
             try {
                 // simula los tiempos de espera de manera aleatoria.
@@ -54,7 +59,7 @@ public class Repartidor implements Runnable {
             }
 
             pedido.setEstadoPedido("ENTREGADO");
-            System.out.println("[Repartidor - " + nombreRepartidor + "] Estado: " + pedido.getEstadoPedido());
+            ventanaPrincipal.registrarMensaje("[Repartidor - " + nombreRepartidor + "] Estado: " + pedido.getEstadoPedido());
         }
     }
 }

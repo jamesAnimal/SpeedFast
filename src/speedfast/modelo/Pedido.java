@@ -1,4 +1,4 @@
-package speedfast.model;
+package speedfast.modelo;
 
 /**
  * Clase que sienta las bases para crear un objeto de tipo pedido.
@@ -9,17 +9,20 @@ public class Pedido {
     private int idPedido;
     private String direccionPedido;
     private EstadoPedido estadoPedido;
+    private String tipoPedido;
 
     /**
      * Constructor que inicializa un pedido con todos sus datos.
      * @param direccionPedido Dirección de entrega del pedido.
      * @param idPedido Identificador único del pedido.
+     * @param tipoPedido Tipo al que corresponde el pedido.
      */
-    public Pedido(String direccionPedido, int idPedido) {
+    public Pedido(String direccionPedido, int idPedido, String tipoPedido) {
 
         this.direccionPedido = direccionPedido;
         this.idPedido = idPedido;
         this.estadoPedido = EstadoPedido.PENDIENTE;
+        this.tipoPedido = tipoPedido;
     }
 
     // Getters y Setters.
@@ -40,12 +43,17 @@ public class Pedido {
         this.estadoPedido = EstadoPedido.valueOf(nuevoEstado);
     }
 
+    public String getTipoPedido() {
+
+        return tipoPedido;
+    }
+
     /**
      * Método que retorna una representación en texto del pedido.
      * @return String con los datos del pedido.
      */
     @Override
     public String toString() {
-        return "Pedido{" + "idPedido=" + idPedido + ", direccionPedido='" + direccionPedido + '\'' + ", estadoPedido=" + estadoPedido + '}';
+        return "Pedido{" + "idPedido=" + idPedido + ", direccionPedido='" + direccionPedido + '\'' + ", estadoPedido=" + estadoPedido + ", tipoPedido=" + tipoPedido + "}";
     }
 }
