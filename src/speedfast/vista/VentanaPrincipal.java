@@ -1,5 +1,7 @@
 package speedfast.vista;
 
+import speedfast.dao.PedidoDAO;
+import speedfast.dao.RepartidorDAO;
 import speedfast.modelo.Repartidor;
 import speedfast.modelo.ZonaDeCarga;
 import speedfast.modelo.Pedido;
@@ -18,25 +20,35 @@ public class VentanaPrincipal extends JFrame {
 
     // Elementos de la interfaz gráfica.
     private JPanel panelPrincipal;
-    private JTextField txtfID;
     private JTextField txtfDireccion;
-    private JLabel lblID;
     private JLabel lblDireccion;
     private JLabel lblTipoPed;
     private JPanel panelIngresoPed;
     private JButton btnGuardarPed;
     private JPanel panelTablaPedidos;
-    private JPanel panelTextaRegistro;
+    private JPanel panelRegistro;
     private JTextArea txtaRegistros;
     private JComboBox cmbxTipoPed;
     private JLabel lblTablaPed;
     private JLabel lblTextaRegistros;
     private JTable tblTablaPed;
     private JScrollPane scrllTablaPed;
-    private JPanel panelTitulo;
+    private JPanel panelTitulo1;
     private JButton btnIniciarEntregas;
     private JScrollPane scrllTxtaRegistros;
     private JLabel lblRegistroPed;
+    private JButton btnRegistrarRepartidor;
+    private JTextField txtfNombreRepartidor;
+    private JPanel panelRegistrarRepartidor;
+    private JLabel lblRepartidor;
+    private JLabel lblNombreRepartidor;
+    private JPanel panelTitulo2;
+    private JPanel panelEspacio1;
+    private JPanel panelEspacio2;
+    private JPanel panelEspacio3;
+    private JPanel panelPedido;
+    private JPanel panelRepartidor;
+    private JPanel panelTabla;
 
     // Modelo de la tabla y zona de carga utilizados por la ventana.
     private DefaultTableModel modeloTabla;
@@ -49,11 +61,12 @@ public class VentanaPrincipal extends JFrame {
 
         setContentPane(panelPrincipal);
         setTitle("SpeedFast - Sistema de Gestión");
-        setSize(700, 800);
+        setSize(700, 950);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         configurarComponentes();
+        actualizarTabla();
         configurarEventos();
 
         UIManager.put("OptionPane.background", new Color(0x0B0A14));
@@ -80,7 +93,6 @@ public class VentanaPrincipal extends JFrame {
             }
         };
 
-        txtfID.setBorder(BorderFactory.createLineBorder(new Color(0xF0289A)));
         txtfDireccion.setBorder(BorderFactory.createLineBorder(new Color(0xF0289A)));
         cmbxTipoPed.setBorder(BorderFactory.createLineBorder(new Color(0xF0289A)));
         txtaRegistros.setBorder(BorderFactory.createLineBorder(new Color(0x22E4FF)));
@@ -99,6 +111,7 @@ public class VentanaPrincipal extends JFrame {
 
         btnGuardarPed.addActionListener(e -> registrarPedido());
         btnIniciarEntregas.addActionListener(e -> iniciarEntregas());
+        btnRegistrarRepartidor.addActionListener(e -> registrarRepartidor());
     }
 
     /**
@@ -108,28 +121,25 @@ public class VentanaPrincipal extends JFrame {
 
         try {
 
-            String idTexto = txtfID.getText().trim();
             String direccion = txtfDireccion.getText().trim();
             String tipo = (String) cmbxTipoPed.getSelectedItem();
 
-            if (idTexto.isEmpty() || direccion.isEmpty() || cmbxTipoPed.getSelectedIndex() == 0) {
+            if (direccion.isEmpty() || cmbxTipoPed.getSelectedIndex() == 0) {
 
                 throw new IllegalArgumentException("Todos los campos son obligatorios.");
             }
 
-            int id = Integer.parseInt(idTexto);
+            Pedido pedido = new Pedido(direccion, tipo);
 
-            Pedido pedido = new Pedido(direccion, id, tipo);
+            PedidoDAO pedidoDAO = new PedidoDAO();
+            pedidoDAO.guardar(pedido);
+
             zonaDeCarga.agregarPedido(pedido);
 
             actualizarTabla();
 
             JOptionPane.showMessageDialog(this, "Pedido registrado correctamente.", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
             limpiarCampos();
-
-        } catch (NumberFormatException ex) {
-
-            JOptionPane.showMessageDialog(this, "El ID debe ser un número entero.", "Error de formato", JOptionPane.ERROR_MESSAGE);
 
         } catch (IllegalArgumentException ex) {
 
@@ -138,20 +148,44 @@ public class VentanaPrincipal extends JFrame {
     }
 
     /**
-     * Método encargado de refrescar la tabla con los pedidos actuales de la zona de carga.
+     * Método encargado de validar el nombre ingresado y registrar un repartidor nuevo en la base de datos.
+     */
+    private void registrarRepartidor() {
+
+        String nombre = txtfNombreRepartidor.getText().trim();
+
+        if (nombre.isEmpty()) {
+
+            JOptionPane.showMessageDialog(this, "El nombre es obligatorio.", "Datos no válidos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Repartidor repartidor = new Repartidor(nombre);
+
+        RepartidorDAO repartidorDAO = new RepartidorDAO();
+        repartidorDAO.guardar(repartidor);
+
+        JOptionPane.showMessageDialog(this, "Repartidor registrado correctamente.", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
+        txtfNombreRepartidor.setText("");
+    }
+
+    /**
+     * Método encargado de refrescar la tabla con los pedidos actuales de la base de datos.
      */
     private void actualizarTabla() {
 
         modeloTabla.setRowCount(0);
 
-        for (Pedido pedido : zonaDeCarga.obtenerPedidos()) {
+        PedidoDAO pedidoDAO = new PedidoDAO();
+
+        for (Pedido pedido : pedidoDAO.listarTodos()) {
 
             Object[] fila = {
 
-                pedido.getIdPedido(),
-                pedido.getDireccionPedido(),
-                pedido.getTipoPedido(),
-                pedido.getEstadoPedido()
+                    pedido.getIdPedido(),
+                    pedido.getDireccionPedido(),
+                    pedido.getTipoPedido(),
+                    pedido.getEstadoPedido()
             };
 
             modeloTabla.addRow(fila);
@@ -163,10 +197,9 @@ public class VentanaPrincipal extends JFrame {
      */
     private void limpiarCampos() {
 
-        txtfID.setText("");
         txtfDireccion.setText("");
         cmbxTipoPed.setSelectedIndex(0);
-        txtfID.requestFocus();
+        txtfDireccion.requestFocus();
     }
 
     /**
@@ -174,15 +207,34 @@ public class VentanaPrincipal extends JFrame {
      */
     private void iniciarEntregas() {
 
-        Repartidor repartidor1 = new Repartidor("Juan Perez", zonaDeCarga, this);
-        Repartidor repartidor2 = new Repartidor("Jorge Rojas", zonaDeCarga, this);
-        Repartidor repartidor3 = new Repartidor("Pedro Castro", zonaDeCarga, this);
+        RepartidorDAO repartidorDAO = new RepartidorDAO();
+
+        String[] nombresFijos = {"Juan Perez", "Jorge Rojas", "Pedro Castro"};
+
+        for (String nombre : nombresFijos) {
+
+            boolean existe = false;
+
+            for (Repartidor repartidor : repartidorDAO.listarTodos()) {
+
+                if (repartidor.getNombreRepartidor().equals(nombre)) {
+                    existe = true;
+                    break;
+                }
+            }
+
+            if (!existe) {
+                repartidorDAO.guardar(new Repartidor(nombre));
+            }
+        }
 
         ExecutorService ejecutor = Executors.newFixedThreadPool(3);
 
-        ejecutor.execute(repartidor1);
-        ejecutor.execute(repartidor2);
-        ejecutor.execute(repartidor3);
+        for (Repartidor repartidor : repartidorDAO.listarTodos()) {
+
+            Repartidor repartidorHilo = new Repartidor(repartidor.getId(), repartidor.getNombreRepartidor(), zonaDeCarga, this);
+            ejecutor.execute(repartidorHilo);
+        }
 
         ejecutor.shutdown();
     }
@@ -200,4 +252,7 @@ public class VentanaPrincipal extends JFrame {
         });
     }
 
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+    }
 }
