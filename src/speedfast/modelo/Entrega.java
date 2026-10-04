@@ -9,6 +9,7 @@ import java.time.LocalTime;
 public class Entrega {
 
     // Atributos de la clase Entrega.
+    private int id;
     private int idPedido;
     private int idRepartidor;
     private LocalDate fecha;
@@ -30,6 +31,14 @@ public class Entrega {
     }
 
     // Getters.
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getIdPedido() {
         return idPedido;
     }

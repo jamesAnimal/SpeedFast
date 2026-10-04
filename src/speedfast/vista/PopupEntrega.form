@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="speedfast.vista.PopupEntrega">
+  <grid id="27dc6" binding="panelPopupEntrega" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="ec130" binding="panelTituloPopEntrega" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="3" left="3" bottom="3" right="3"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-16053740"/>
+        </properties>
+        <border type="line">
+          <color color="-1038182"/>
+        </border>
+        <children>
+          <component id="26ff8" class="javax.swing.JLabel" binding="lblPopRegistrarEntrega">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Courier New" size="18" style="1"/>
+              <foreground color="-14490369"/>
+              <text value="&gt;&gt;&gt;Registro de Entrega&lt;&lt;&lt;"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="78468" binding="panelFormularioEntrega" layout-manager="GridLayoutManager" row-count="9" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="3" left="3" bottom="3" right="3"/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-16053740"/>
+        </properties>
+        <border type="line">
+          <color color="-1038182"/>
+        </border>
+        <children>
+          <component id="e4799" class="javax.swing.JLabel" binding="lblFechaEntrega">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Courier New" size="16"/>
+              <foreground color="-14490369"/>
+              <text value="Fecha (aaaa-mm-dd):"/>
+            </properties>
+          </component>
+          <component id="79fb5" class="javax.swing.JTextField" binding="txtfFechaEntrega">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-16053740"/>
+              <font name="Courier New" size="16" style="0"/>
+              <foreground color="-14490369"/>
+              <selectedTextColor color="-16053740"/>
+              <selectionColor color="-1038182"/>
+            </properties>
+          </component>
+          <component id="7638f" class="javax.swing.JLabel" binding="lblPedidoEntrega">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Courier New" size="16"/>
+              <foreground color="-14490369"/>
+              <text value="Pedido:"/>
+            </properties>
+          </component>
+          <component id="c82d2" class="javax.swing.JComboBox" binding="cmbxPedidoEntrega">
+            <constraints>
+              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-16053740"/>
+              <focusCycleRoot value="false"/>
+              <font name="Courier New" size="16" style="0"/>
+              <foreground color="-14490369"/>
+            </properties>
+          </component>
+          <component id="42b6f" class="javax.swing.JLabel" binding="lblRepartidor">
+            <constraints>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Courier New" size="16"/>
+              <foreground color="-14490369"/>
+              <text value="Repartidor:"/>
+            </properties>
+          </component>
+          <component id="e3a40" class="javax.swing.JComboBox" binding="cmbxRepartidor">
+            <constraints>
+              <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-16053740"/>
+              <focusCycleRoot value="false"/>
+              <font name="Courier New" size="16" style="0"/>
+              <foreground color="-14490369"/>
+            </properties>
+          </component>
+          <component id="c0e92" class="javax.swing.JLabel" binding="lblHoraEntrega">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Courier New" size="16"/>
+              <foreground color="-14490369"/>
+              <text value="Hora (hh:mm:ss):"/>
+            </properties>
+          </component>
+          <component id="12ef3" class="javax.swing.JTextField" binding="txtfHoraEntrega">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-16053740"/>
+              <font name="Courier New" size="16" style="0"/>
+              <foreground color="-14490369"/>
+              <selectedTextColor color="-16053740"/>
+              <selectionColor color="-1038182"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="9fdf3" binding="panelBtnPopEntrega" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="3" left="3" bottom="3" right="3"/>
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-16053740"/>
+        </properties>
+        <border type="line">
+          <color color="-1038182"/>
+        </border>
+        <children>
+          <component id="be835" class="javax.swing.JButton" binding="btnPopEntrega">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-14490369"/>
+              <font name="Courier New" size="18" style="1"/>
+              <foreground color="-16053740"/>
+              <text value="[Registrar Entrega]"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

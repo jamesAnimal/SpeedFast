@@ -5,7 +5,7 @@ import javax.swing.*;
 /**
  * Clase encargada de cargar la ventana de Bienvenida con las instrucciones y el botón para ingresar a la app.
  */
-public class VentanaBienvenida extends JFrame{
+public class VentanaBienvenida extends JFrame {
 
     private JButton btnIniciar;
     private JLabel lblBienvenida;
@@ -31,6 +31,7 @@ public class VentanaBienvenida extends JFrame{
         lblIcono.setIcon(new ImageIcon(getClass().getResource("/recursos/speedfast_logo_370x70.png")));
 
         btnIniciar.addActionListener(e -> {
+
             new VentanaPrincipal().setVisible(true);
             dispose();
         });

@@ -1,7 +1,6 @@
 package speedfast.main;
 
 import speedfast.vista.VentanaBienvenida;
-
 import javax.swing.SwingUtilities;
 
 /**

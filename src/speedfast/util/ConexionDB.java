@@ -1,4 +1,4 @@
-package speedfast.dao;
+package speedfast.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

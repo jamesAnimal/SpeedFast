@@ -1,72 +1,76 @@
 package speedfast.vista;
 
-import speedfast.dao.PedidoDAO;
-import speedfast.dao.RepartidorDAO;
-import speedfast.modelo.Repartidor;
-import speedfast.modelo.ZonaDeCarga;
+import speedfast.controlador.SpeedFastControlador;
 import speedfast.modelo.Pedido;
-
+import speedfast.modelo.Repartidor;
+import speedfast.modelo.Entrega;
+import speedfast.modelo.EstadoPedido;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import javax.swing.text.DefaultCaret;
+import java.awt.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 
 /**
- * Clase encargada de gestionar la interfaz gráfica principal del sistema, permitiendo registrar pedidos, visualizarlos en una tabla e iniciar las entregas.
+ * Clase encargada de gestionar la interfaz gráfica principal del sistema, permitiendo administrar pedidos, repartidores y entregas.
  */
 public class VentanaPrincipal extends JFrame {
 
     // Elementos de la interfaz gráfica.
     private JPanel panelPrincipal;
-    private JTextField txtfDireccion;
-    private JLabel lblDireccion;
-    private JLabel lblTipoPed;
-    private JPanel panelIngresoPed;
-    private JButton btnGuardarPed;
-    private JPanel panelTablaPedidos;
-    private JPanel panelRegistro;
-    private JTextArea txtaRegistros;
-    private JComboBox cmbxTipoPed;
-    private JLabel lblTablaPed;
-    private JLabel lblTextaRegistros;
-    private JTable tblTablaPed;
-    private JScrollPane scrllTablaPed;
-    private JPanel panelTitulo1;
+    private JTable tablaPedidos;
+    private JTable tablaRepartidores;
+    private JTable tablaEntregas;
+    private JButton btnRegistrarPedidos;
+    private JButton btnEditarPedidos;
+    private JButton btnEliminarPedidos;
+    private JButton btnRegistrarRepartidores;
+    private JButton btnEditarRepartidores;
+    private JButton btnEliminarRepartidores;
+    private JButton btnRegistrarEntregas;
+    private JButton btnEditarEntregas;
+    private JButton btnEliminarEntregas;
+    private JPanel panelBtnsPedidos;
+    private JPanel panelPedidos;
+    private JPanel panelTituloPedidos;
+    private JLabel lblTituloPedidos;
+    private JPanel panelRepartidores;
+    private JPanel panelBtnsRepartidores;
+    private JPanel panelTituloRepartidores;
+    private JLabel lblTituloRepartidores;
+    private JPanel panelEntregas;
+    private JPanel panelBtnsEntregas;
+    private JPanel panelTituloEntregas;
+    private JLabel lblTituloEntregas;
+    private JScrollPane scrollPedidos;
+    private JScrollPane scrollRepartidores;
+    private JScrollPane scrollEntregas;
+    private JPanel panelActividad;
+    private JTextArea txtaActividad;
+    private JLabel lblActividad;
+    private JScrollPane scrllActividad;
     private JButton btnIniciarEntregas;
-    private JScrollPane scrllTxtaRegistros;
-    private JLabel lblRegistroPed;
-    private JButton btnRegistrarRepartidor;
-    private JTextField txtfNombreRepartidor;
-    private JPanel panelRegistrarRepartidor;
-    private JLabel lblRepartidor;
-    private JLabel lblNombreRepartidor;
-    private JPanel panelTitulo2;
-    private JPanel panelEspacio1;
-    private JPanel panelEspacio2;
-    private JPanel panelEspacio3;
-    private JPanel panelPedido;
-    private JPanel panelRepartidor;
-    private JPanel panelTabla;
-
-    // Modelo de la tabla y zona de carga utilizados por la ventana.
-    private DefaultTableModel modeloTabla;
-    private final ZonaDeCarga zonaDeCarga = new ZonaDeCarga();
+    private int simulacionesActivas = 0;
+    private final SpeedFastControlador controlador = new SpeedFastControlador();
+    private DefaultTableModel modeloTablaPedidos;
+    private DefaultTableModel modeloTablaRepartidores;
+    private DefaultTableModel modeloTablaEntregas;
 
     /**
-     * Constructor que inicializa la ventana principal, configura sus componentes y sus eventos.
+     * Constructor que inicializa la ventana principal y ejecuta la carga de la interfaz.
      */
     public VentanaPrincipal() {
 
         setContentPane(panelPrincipal);
         setTitle("SpeedFast - Sistema de Gestión");
-        setSize(700, 950);
+        setSize(800, 840);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         configurarComponentes();
-        actualizarTabla();
+        actualizarTablas();
         configurarEventos();
 
         UIManager.put("OptionPane.background", new Color(0x0B0A14));
@@ -77,30 +81,53 @@ public class VentanaPrincipal extends JFrame {
     }
 
     /**
-     * Configuración inicial de los componentes.
+     * Método encargado de configurar los componentes iniciales de la interfaz.
      */
     private void configurarComponentes() {
 
-        cmbxTipoPed.setModel(new DefaultComboBoxModel<>(new String[]{"-- Seleccione --", "comida", "encomienda", "express"}));
-
-        String[] columnas = {"ID", "Dirección", "Tipo", "Estado"};
-
-        modeloTabla = new DefaultTableModel(columnas, 0) {
+        modeloTablaPedidos = new DefaultTableModel(new String[]{"ID", "Dirección", "Tipo", "Estado"}, 0) {
 
             @Override
             public boolean isCellEditable(int row, int column) {
+
                 return false;
             }
         };
 
-        txtfDireccion.setBorder(BorderFactory.createLineBorder(new Color(0xF0289A)));
-        cmbxTipoPed.setBorder(BorderFactory.createLineBorder(new Color(0xF0289A)));
-        txtaRegistros.setBorder(BorderFactory.createLineBorder(new Color(0x22E4FF)));
-        tblTablaPed.getTableHeader().setBackground(new Color(0x0B0A14));
-        tblTablaPed.getTableHeader().setForeground(new Color(0x22E4FF));
-        tblTablaPed.setModel(modeloTabla);
-        txtaRegistros.setEditable(false);
-        DefaultCaret caret = (DefaultCaret) txtaRegistros.getCaret();
+        modeloTablaRepartidores = new DefaultTableModel(new String[]{"ID", "Nombre"}, 0) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+
+                return false;
+            }
+        };
+
+        modeloTablaEntregas = new DefaultTableModel(new String[]{"ID", "ID Pedido", "ID Repartidor", "Fecha", "Hora"}, 0) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+
+                return false;
+            }
+        };
+
+        tablaPedidos.setModel(modeloTablaPedidos);
+        tablaRepartidores.setModel(modeloTablaRepartidores);
+        tablaEntregas.setModel(modeloTablaEntregas);
+        tablaPedidos.getTableHeader().setBackground(new Color(0x0B0A14));
+        tablaPedidos.getTableHeader().setForeground(new Color(0x22E4FF));
+        tablaRepartidores.getTableHeader().setBackground(new Color(0x0B0A14));
+        tablaRepartidores.getTableHeader().setForeground(new Color(0x22E4FF));
+        tablaEntregas.getTableHeader().setBackground(new Color(0x0B0A14));
+        tablaEntregas.getTableHeader().setForeground(new Color(0x22E4FF));
+        txtaActividad.setBorder(BorderFactory.createLineBorder(new Color(0x22E4FF)));
+        txtaActividad.setEditable(false);
+        tablaPedidos.setFillsViewportHeight(true);
+        tablaRepartidores.setFillsViewportHeight(true);
+        tablaEntregas.setFillsViewportHeight(true);
+
+        DefaultCaret caret = (DefaultCaret) txtaActividad.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
     }
 
@@ -109,150 +136,319 @@ public class VentanaPrincipal extends JFrame {
      */
     private void configurarEventos() {
 
-        btnGuardarPed.addActionListener(e -> registrarPedido());
-        btnIniciarEntregas.addActionListener(e -> iniciarEntregas());
-        btnRegistrarRepartidor.addActionListener(e -> registrarRepartidor());
-    }
+        btnRegistrarPedidos.addActionListener(e -> {
 
-    /**
-     * Método encargado de validar los datos ingresados en el formulario, crear un pedido y agregarlo a la zona de carga.
-     */
-    private void registrarPedido() {
+            new PopupPedido(null).setVisible(true);
+            actualizarTablas();
+        });
 
-        try {
+        btnEditarPedidos.addActionListener(e -> {
 
-            String direccion = txtfDireccion.getText().trim();
-            String tipo = (String) cmbxTipoPed.getSelectedItem();
+            int fila = tablaPedidos.getSelectedRow();
 
-            if (direccion.isEmpty() || cmbxTipoPed.getSelectedIndex() == 0) {
+            if (fila == -1) {
 
-                throw new IllegalArgumentException("Todos los campos son obligatorios.");
+                JOptionPane.showMessageDialog(this, "Selecciona un pedido para editar.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
             }
 
-            Pedido pedido = new Pedido(direccion, tipo);
+            int id = (int) modeloTablaPedidos.getValueAt(fila, 0);
+            String direccion = (String) modeloTablaPedidos.getValueAt(fila, 1);
+            String tipo = (String) modeloTablaPedidos.getValueAt(fila, 2);
 
-            PedidoDAO pedidoDAO = new PedidoDAO();
-            pedidoDAO.guardar(pedido);
+            Pedido pedidoSeleccionado = new Pedido(direccion, tipo);
+            pedidoSeleccionado.setIdPedido(id);
 
-            zonaDeCarga.agregarPedido(pedido);
+            new PopupPedido(pedidoSeleccionado).setVisible(true);
+            actualizarTablas();
+        });
 
-            actualizarTabla();
+        btnEliminarPedidos.addActionListener(e -> {
 
-            JOptionPane.showMessageDialog(this, "Pedido registrado correctamente.", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
-            limpiarCampos();
+            int fila = tablaPedidos.getSelectedRow();
 
-        } catch (IllegalArgumentException ex) {
+            if (fila == -1) {
 
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Datos no válidos", JOptionPane.WARNING_MESSAGE);
-        }
+                JOptionPane.showMessageDialog(this, "Selecciona un pedido para eliminar.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int id = (int) modeloTablaPedidos.getValueAt(fila, 0);
+
+            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Eliminar el pedido seleccionado?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+            if (confirmacion == JOptionPane.YES_OPTION) {
+
+                boolean eliminado = controlador.eliminarPedido(id);
+
+                if (!eliminado) {
+
+                    JOptionPane.showMessageDialog(this, "No se puede eliminar: el pedido tiene una entrega asociada.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+                actualizarTablas();
+            }
+        });
+
+        btnRegistrarRepartidores.addActionListener(e -> {
+
+            new PopupRepartidor(null).setVisible(true);
+            actualizarTablas();
+        });
+
+        btnEditarRepartidores.addActionListener(e -> {
+
+            int fila = tablaRepartidores.getSelectedRow();
+
+            if (fila == -1) {
+
+                JOptionPane.showMessageDialog(this, "Selecciona un repartidor para editar.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int id = (int) modeloTablaRepartidores.getValueAt(fila, 0);
+            String nombre = (String) modeloTablaRepartidores.getValueAt(fila, 1);
+
+            Repartidor repartidorSeleccionado = new Repartidor(id, nombre);
+
+            new PopupRepartidor(repartidorSeleccionado).setVisible(true);
+            actualizarTablas();
+        });
+
+        btnEliminarRepartidores.addActionListener(e -> {
+
+            int fila = tablaRepartidores.getSelectedRow();
+
+            if (fila == -1) {
+
+                JOptionPane.showMessageDialog(this, "Selecciona un repartidor para eliminar.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int id = (int) modeloTablaRepartidores.getValueAt(fila, 0);
+
+            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Eliminar el repartidor seleccionado?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+            if (confirmacion == JOptionPane.YES_OPTION) {
+
+                boolean eliminado = controlador.eliminarRepartidor(id);
+
+                if (!eliminado) {
+
+                    JOptionPane.showMessageDialog(this, "No se puede eliminar: el repartidor tiene una entrega asociada.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+                actualizarTablas();
+            }
+        });
+
+        btnRegistrarEntregas.addActionListener(e -> {
+
+            new PopupEntrega(null).setVisible(true);
+            actualizarTablas();
+        });
+
+        btnEditarEntregas.addActionListener(e -> {
+
+            int fila = tablaEntregas.getSelectedRow();
+
+            if (fila == -1) {
+
+                JOptionPane.showMessageDialog(this, "Selecciona una entrega para editar.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int id = (int) modeloTablaEntregas.getValueAt(fila, 0);
+            int idPedido = (int) modeloTablaEntregas.getValueAt(fila, 1);
+            int idRepartidor = (int) modeloTablaEntregas.getValueAt(fila, 2);
+            LocalDate fecha = (LocalDate) modeloTablaEntregas.getValueAt(fila, 3);
+            LocalTime hora = (LocalTime) modeloTablaEntregas.getValueAt(fila, 4);
+
+            Entrega entregaSeleccionada = new Entrega(idPedido, idRepartidor, fecha, hora);
+            entregaSeleccionada.setId(id);
+
+            new PopupEntrega(entregaSeleccionada).setVisible(true);
+            actualizarTablas();
+        });
+
+        btnEliminarEntregas.addActionListener(e -> {
+
+            int fila = tablaEntregas.getSelectedRow();
+
+            if (fila == -1) {
+
+                JOptionPane.showMessageDialog(this, "Selecciona una entrega para eliminar.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int id = (int) modeloTablaEntregas.getValueAt(fila, 0);
+
+            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Eliminar la entrega seleccionada?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+            if (confirmacion == JOptionPane.YES_OPTION) {
+
+                controlador.eliminarEntrega(id);
+                actualizarTablas();
+            }
+        });
+
+        btnIniciarEntregas.addActionListener(e -> {
+
+            List<Pedido> pedidos = controlador.obtenerPedidos();
+            List<Entrega> entregas = controlador.obtenerEntregas();
+
+            for (Pedido pedido : pedidos) {
+
+                if (pedido.getEstadoPedido() == EstadoPedido.PENDIENTE && entregaAsociada(pedido, entregas)) {
+
+                    simulacionesActivas++;
+                    iniciarSimulacionPedido(pedido);
+                }
+            }
+
+            if (simulacionesActivas > 0) {
+                btnIniciarEntregas.setEnabled(false);
+            }
+        });
     }
 
     /**
-     * Método encargado de validar el nombre ingresado y registrar un repartidor nuevo en la base de datos.
+     * Método encargado de refrescar las 3 tablas con los datos actuales de la base de datos.
      */
-    private void registrarRepartidor() {
+    private void actualizarTablas() {
 
-        String nombre = txtfNombreRepartidor.getText().trim();
+        modeloTablaPedidos.setRowCount(0);
 
-        if (nombre.isEmpty()) {
+        for (Pedido pedido : controlador.obtenerPedidos()) {
 
-            JOptionPane.showMessageDialog(this, "El nombre es obligatorio.", "Datos no válidos", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        Repartidor repartidor = new Repartidor(nombre);
-
-        RepartidorDAO repartidorDAO = new RepartidorDAO();
-        repartidorDAO.guardar(repartidor);
-
-        JOptionPane.showMessageDialog(this, "Repartidor registrado correctamente.", "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
-        txtfNombreRepartidor.setText("");
-    }
-
-    /**
-     * Método encargado de refrescar la tabla con los pedidos actuales de la base de datos.
-     */
-    private void actualizarTabla() {
-
-        modeloTabla.setRowCount(0);
-
-        PedidoDAO pedidoDAO = new PedidoDAO();
-
-        for (Pedido pedido : pedidoDAO.listarTodos()) {
-
-            Object[] fila = {
+            modeloTablaPedidos.addRow(new Object[]{
 
                     pedido.getIdPedido(),
                     pedido.getDireccionPedido(),
                     pedido.getTipoPedido(),
                     pedido.getEstadoPedido()
-            };
+            });
+        }
 
-            modeloTabla.addRow(fila);
+        modeloTablaRepartidores.setRowCount(0);
+
+        for (Repartidor repartidor : controlador.obtenerRepartidores()) {
+
+            modeloTablaRepartidores.addRow(new Object[]{
+
+                    repartidor.getId(),
+                    repartidor.getNombreRepartidor()
+            });
+        }
+
+        modeloTablaEntregas.setRowCount(0);
+
+        for (Entrega entrega : controlador.obtenerEntregas()) {
+
+            modeloTablaEntregas.addRow(new Object[]{
+
+                    entrega.getId(),
+                    entrega.getIdPedido(),
+                    entrega.getIdRepartidor(),
+                    entrega.getFecha(),
+                    entrega.getHora()
+            });
         }
     }
 
     /**
-     * Método encargado de limpiar los campos del formulario luego de registrar un pedido.
+     * Método encargado de verificar si un pedido ya tiene al menos una entrega asociada.
+     * @param pedido Pedido a verificar.
+     * @param entregas Lista de entregas donde buscar la asociación.
+     * @return true si el pedido tiene una entrega asociada.
      */
-    private void limpiarCampos() {
+    private boolean entregaAsociada(Pedido pedido, List<Entrega> entregas) {
 
-        txtfDireccion.setText("");
-        cmbxTipoPed.setSelectedIndex(0);
-        txtfDireccion.requestFocus();
+        for (Entrega entrega : entregas) {
+
+            if (entrega.getIdPedido() == pedido.getIdPedido()) {
+
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
-     * Método encargado de crear los repartidores y ejecutarlos en paralelo para iniciar las entregas.
+     * Método encargado de lanzar un hilo que simula el reparto de un pedido, actualizando su estado y mostrando el avance en el panel de Actividad.
+     * @param pedido Pedido a simular.
      */
-    private void iniciarEntregas() {
+    private void iniciarSimulacionPedido(Pedido pedido) {
 
-        RepartidorDAO repartidorDAO = new RepartidorDAO();
+        Thread hilo = new Thread(() -> {
 
-        String[] nombresFijos = {"Juan Perez", "Jorge Rojas", "Pedro Castro"};
+            try {
 
-        for (String nombre : nombresFijos) {
+                SwingUtilities.invokeLater(() -> txtaActividad.append("Pedido " + pedido.getIdPedido() + ": iniciando reparto...\n"));
 
-            boolean existe = false;
+                Thread.sleep(2000);
 
-            for (Repartidor repartidor : repartidorDAO.listarTodos()) {
+                boolean actualizadoEnReparto = controlador.actualizarEstadoPedido(pedido.getIdPedido(), "EN_REPARTO");
 
-                if (repartidor.getNombreRepartidor().equals(nombre)) {
-                    existe = true;
-                    break;
+                if (!actualizadoEnReparto) {
+
+                    SwingUtilities.invokeLater(() -> {
+
+                        txtaActividad.append("Pedido " + pedido.getIdPedido() + ": error al actualizar a EN_REPARTO, simulación detenida.\n");
+                        finalizarSimulacion();
+                    });
+
+                    return;
                 }
+
+                SwingUtilities.invokeLater(() -> {
+
+                    txtaActividad.append("Pedido " + pedido.getIdPedido() + ": en reparto.\n");
+                    actualizarTablas();
+                });
+
+                Thread.sleep(2000);
+
+                boolean actualizadoEntregado = controlador.actualizarEstadoPedido(pedido.getIdPedido(), "ENTREGADO");
+
+                if (!actualizadoEntregado) {
+
+                    SwingUtilities.invokeLater(() -> {
+
+                        txtaActividad.append("Pedido " + pedido.getIdPedido() + ": error al actualizar a ENTREGADO, simulación detenida.\n");
+                        finalizarSimulacion();
+                    });
+
+                    return;
+                }
+
+                SwingUtilities.invokeLater(() -> {
+
+                    txtaActividad.append("Pedido " + pedido.getIdPedido() + ": entregado.\n");
+                    actualizarTablas();
+                    finalizarSimulacion();
+                });
+
+            } catch (InterruptedException ex) {
+
+                Thread.currentThread().interrupt();
             }
+        });
 
-            if (!existe) {
-                repartidorDAO.guardar(new Repartidor(nombre));
-            }
-        }
-
-        ExecutorService ejecutor = Executors.newFixedThreadPool(3);
-
-        for (Repartidor repartidor : repartidorDAO.listarTodos()) {
-
-            Repartidor repartidorHilo = new Repartidor(repartidor.getId(), repartidor.getNombreRepartidor(), zonaDeCarga, this);
-            ejecutor.execute(repartidorHilo);
-        }
-
-        ejecutor.shutdown();
+        hilo.start();
     }
 
     /**
-     * Método que agrega un mensaje sobre el estado de los hilos al registro de actividad.
-     * @param mensaje Mensaje que se va a mostrar en el registro de actividad.
+     * Método encargado de restar una simulación activa al contador y reactivar el botón cuando no queda ninguna en curso.
      */
-    public void registrarMensaje(String mensaje) {
+    private void finalizarSimulacion() {
 
-        SwingUtilities.invokeLater(() -> {
+        simulacionesActivas--;
 
-            txtaRegistros.append(mensaje + "\n");
-            actualizarTabla();
-        });
-    }
+        if (simulacionesActivas == 0) {
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
+            btnIniciarEntregas.setEnabled(true);
+        }
     }
 }

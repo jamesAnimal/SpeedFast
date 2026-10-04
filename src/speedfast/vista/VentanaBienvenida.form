@@ -43,7 +43,7 @@
         <properties>
           <font name="Courier New" size="16"/>
           <foreground color="-14490369"/>
-          <text value="presiona &quot;Registrar Pedido&quot; para agregarlo a la tabla, y cuando"/>
+          <text value="Repartidores y Entregas) para abrir el formulario"/>
         </properties>
       </component>
       <component id="85fb1" class="javax.swing.JLabel" binding="lblInstrucciones2">
@@ -53,7 +53,7 @@
         <properties>
           <font name="Courier New" size="16"/>
           <foreground color="-14490369"/>
-          <text value="tengas todos los pedidos que quieras, presiona &quot;Asignar "/>
+          <text value="correspondiente y agregar un nuevo registro."/>
         </properties>
       </component>
       <component id="d3388" class="javax.swing.JLabel" binding="lblInstrucciones3">
@@ -63,7 +63,7 @@
         <properties>
           <font name="Courier New" size="16"/>
           <foreground color="-14490369"/>
-          <text value="repartidores e iniciar entregas&quot; para comenzar el despacho y"/>
+          <text value="Selecciona una fila y usa Editar o Eliminar para"/>
         </properties>
       </component>
       <component id="a2b32" class="javax.swing.JLabel" binding="lblInstrucciones4">
@@ -73,7 +73,7 @@
         <properties>
           <font name="Courier New" size="16"/>
           <foreground color="-14490369"/>
-          <text value="ver la actividad en el registro de abajo."/>
+          <text value="modificar o borrar un registro existente."/>
         </properties>
       </component>
       <component id="cc2fb" class="javax.swing.JButton" binding="btnIniciar">
@@ -95,7 +95,7 @@
         <properties>
           <font name="Courier New" size="16"/>
           <foreground color="-14490369"/>
-          <text value="Completa el formulario con ID, Dirección y Tipo de pedido,"/>
+          <text value="Usa los botones Registrar en cada sección (Pedidos"/>
         </properties>
       </component>
     </children>
